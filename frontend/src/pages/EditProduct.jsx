@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -8,7 +8,7 @@ const EditProduct = () => {
   const [form, setForm] = useState({ name: '', price: '', category: '', description: '', imageUrl: '', stock: '' });
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${id}`).then((res) => setForm(res.data));
+    API.get(`/products/${id}`).then((res) => setForm(res.data));
   }, [id]);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,7 +16,7 @@ const EditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/products/${id}`, form);
+      await API.put(`/products/${id}`, form);
       navigate('/products');
     } catch (error) {
       console.error('Error updating product:', error);

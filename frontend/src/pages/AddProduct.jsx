@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API from '../api';
 
 const AddProduct = () => {
   const [form, setForm] = useState({ name: '', price: '', category: '', description: '', imageUrl: '', stock: '' });
@@ -13,7 +13,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/products', form);
+      await API.post('/products', form);
       navigate('/products');
     } catch (error) {
       console.error('Error adding product:', error);

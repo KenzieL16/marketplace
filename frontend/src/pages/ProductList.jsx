@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import API from '../api'; 
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +11,8 @@ const ProductList = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/products');
+
+      const res = await API.get('/products');
       setProducts(res.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -21,7 +22,7 @@ const ProductList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Yakin ingin menghapus produk ini?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`);
+        await API.delete(`/products/${id}`);
         fetchProducts();
       } catch (error) {
         console.error('Error deleting product:', error);
@@ -38,7 +39,7 @@ const ProductList = () => {
             <img src={p.imageUrl} alt={p.name} />
             <div className="info">
               <h3>{p.name}</h3>
-              <p className="price">Rp {p.price.toLocaleString('id-ID')}</p>
+              <p className="price">Rp {p.price ? p.price.toLocaleString('id-ID') : 0}</p>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Kategori: {p.category}</p>
               <div style={{ marginTop: '15px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 <Link to={`/products/${p._id}`} className="btn">Detail</Link>

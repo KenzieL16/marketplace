@@ -1,0 +1,14 @@
+frontend/node_modules/
+
+backend/.env
+
+# Build & Output Folders
+frontend/dist/
+frontend/build/
+*.log
+
+# OS & Editor Specific Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

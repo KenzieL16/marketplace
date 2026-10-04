@@ -3,7 +3,6 @@ import { getDB } from '../config/db.js';
 
 const getCollection = () => getDB().collection('products');
 
-// READ ALL
 export const getProducts = async (req, res) => {
   try {
     const products = await getCollection().find({}).toArray();
@@ -13,7 +12,6 @@ export const getProducts = async (req, res) => {
   }
 };
 
-// READ BY ID
 export const getProductById = async (req, res) => {
   try {
     const product = await getCollection().findOne({ _id: new ObjectId(req.params.id) });
@@ -27,7 +25,6 @@ export const getProductById = async (req, res) => {
   }
 };
 
-// CREATE
 export const createProduct = async (req, res) => {
   try {
     const { name, price, category, description, imageUrl, stock } = req.body;
@@ -48,7 +45,6 @@ export const createProduct = async (req, res) => {
   }
 };
 
-// UPDATE
 export const updateProduct = async (req, res) => {
   try {
     const { name, price, category, description, imageUrl, stock } = req.body;

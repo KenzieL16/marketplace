@@ -12,7 +12,6 @@ export async function connectToMongoDB() {
   try {
     await client.connect();
     console.log("You successfully connected to MongoDB!");
-    // Menghubungkan ke nama database 'marketplace_db'
     db = client.db('marketplace_db'); 
     return db;
   } catch (err) {
